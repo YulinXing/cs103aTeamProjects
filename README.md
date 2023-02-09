@@ -1,5 +1,8 @@
 # cs103aTeamProjects
 a folder of team28's works
+
+print("Hello World!")
+
 Team:
 * Tim Xing
 * Chris liang
