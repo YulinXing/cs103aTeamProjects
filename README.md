@@ -6,7 +6,7 @@ print("Hello World!")
 ```
 
 Team:
-* Tim Xing
+* Tim Xing(Captain)
 * Chris liang
 * Matthew Yue
 * Yishan Gao
