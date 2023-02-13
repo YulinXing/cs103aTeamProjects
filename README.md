@@ -2,7 +2,7 @@
 a folder of team28's works
 
 ```
-print("Hello World!")
+"Hello World!"
 ```
 
 Team:
