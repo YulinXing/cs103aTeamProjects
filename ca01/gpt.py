@@ -50,4 +50,8 @@ if __name__=='__main__':
     '''
     import os
     g = GPT(os.environ.get("APIKEY"))
+<<<<<<< HEAD
     print(g.getResponse("what does openai's GPT stand for?"))
+=======
+    print(g.getResponse("what does openai's GPT stand for?"))
+>>>>>>> 10dba5c6347d93ff318ead8b9d50ef6810aa822a

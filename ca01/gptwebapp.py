@@ -68,4 +68,8 @@ def gptdemo():
 
 if __name__=='__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(
+<<<<<<< HEAD
     app.run(debug=True,port=5001)
+=======
+    app.run(debug=True,port=5001)
+>>>>>>> 10dba5c6347d93ff318ead8b9d50ef6810aa822a
