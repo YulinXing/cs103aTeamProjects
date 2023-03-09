@@ -27,9 +27,9 @@ import os
 app = Flask(__name__)
 g = GPT((os.environ.get('APIKEY')))
 
-
+@app.route('/')
 @app.route('/<name>')
-def home(name):
+def home(name='Tim'):
     ''' display a link to the general query page '''
     print('processing / route')
     return f'''
@@ -49,7 +49,6 @@ def home(name):
             </li>
         </ul>
     '''
-
 
 @app.route('/about')
 def about():
@@ -106,7 +105,6 @@ def index():
         <h1 style="font-family:verdana">Pages of our members</h1>
         <ul>
             <li><a style="font-family:Courier New;font-size:20px" href="{url_for('home', name='Tim')}">Tim</a></li>
-            <li><a style="font-family:Courier New;font-size:20px" href="{url_for('home', name='Chris')}">Chris</a></li>
         </ul>
         <a style="font-family:verdana;font-size:20px" href="{url_for('home', name=name)}">Back to main</a>
     '''
@@ -123,8 +121,8 @@ def form():
         if name == 'Tim':
             image_data = g.generateImage(prompt)
             response = f'<img src="data:image/png;base64,{image_data}"/>'
-        elif name == 'Chris':
-            response = g.getResponse(prompt)
+        # elif name == 'Chris':
+        #     response = g.getResponse(prompt)
         else:
             response = 'Error: Invalid name'
         return f'''
