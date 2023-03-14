@@ -84,7 +84,7 @@ def team():
         <ul>
             <p style="font-family:Courier New;font-size:25px">Tim Xing</p>
             <ul>
-                <li><p style=d"font-family:Courier New;font-size:20px">.......</p></li>
+                <li><p style=d"font-family:Courier New;font-size:20px">Captain, made a GPT Web App that can generate an image according to the prompt</p></li>
             </ul>
             
             # add your roles below
@@ -121,8 +121,6 @@ def form():
         if name == 'Tim':
             image_data = g.generateImage(prompt)
             response = f'<img src="data:image/png;base64,{image_data}"/>'
-        # elif name == 'Chris':
-        #     response = g.getResponse(prompt)
         else:
             response = 'Error: Invalid name'
         return f'''
