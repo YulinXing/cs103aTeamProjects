@@ -14,7 +14,7 @@ On Mac
 
 On Windows:
 % pip install openai
-% $env:APIKEY="....." # in powershell 在系统的环境变量里面加入APIKEY，这个需要有chatgpt账号才可以获取，chatgpt账号大陆的手机号不能注册，需要买一个别的国家的虚拟号码
+% $env:APIKEY="....." # 
 % python gpt.py
 '''
 import openai
