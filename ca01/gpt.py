@@ -84,5 +84,3 @@ class GPT():
     
     # add your methods below
 
-
-if __name__ == '__main__':
