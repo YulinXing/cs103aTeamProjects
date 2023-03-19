@@ -38,7 +38,7 @@ app.secret_key = b'xamdjqowid%Y@*IKOJ@QHdoabdiuawn3w5'
 @app.route('/')
 def index():
     ''' display a link to the general query page '''
-    # 渲染模板index.html
+    # 
     return render_template('index.html')
 
 
@@ -51,7 +51,7 @@ def login():
         # acess password
         password = request.form.get('password')
         # Determine account password
-        if name == '张三' and password == '123':
+        if name == 'jane doe' and password == '123':
             return render_template('center.html')
         else:
             return render_template('error.html')
