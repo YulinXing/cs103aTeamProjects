@@ -69,7 +69,7 @@ class GPT():
 
         return img_str
     
-    def recipe(self,course):
+    def paraphrase(self,course):
         ''' Generate a paraphrase for a sentence '''
         prompt = 'genrate a paraphrase for ' + course
         completion = openai.Completion.create(
@@ -88,4 +88,4 @@ if __name__ == '__main__':
     '''
     '''
     g = GPT(os.environ.get("APIKEY"))
-    print(g.recipe("I love you"))
+    print(g.paraphrase("I love you"))
