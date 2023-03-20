@@ -89,7 +89,7 @@ def team():
             <p style="font-family:Courier New;font-size:25px">Chris Liang</p>
             <p style="font-family:Courier New;font-size:25px">Matthew Yue</p>
             <ul>
-                <li><p style=d"font-family:Courier New;font-size:20px">Created a GPT Web App to correct the spelling, grammar, and punctuation of a user inputted prompt. to </p></li>
+                <li><p style=d"font-family:Courier New;font-size:20px">Created a GPT Web App to correct the spelling, grammar, and punctuation of a user inputted prompt.</p></li>
             </ul>
             <p style="font-family:Courier New;font-size:25px">Yishan Gao</p>
             <p style="font-family:Courier New;font-size:25px">Tingwei Pu</p>
