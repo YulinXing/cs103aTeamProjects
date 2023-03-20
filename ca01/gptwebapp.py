@@ -35,7 +35,7 @@ def index():
     return f'''
         <h1>GPT Demo</h1>
         <a href="{url_for('gptdemo')}">Ask questions to GPT</a> <p>
-        <a href="{url_for('About')}">About</a> <p>
+        <a href="{url_for('about')}">About</a> <p>
         <a href="{url_for('team')}">Team</a> <p>
         <a href="{url_for('indexpage')}">Index</a> <p>
         <a href="{url_for('formpage')}">Form Page</a> <p>    
@@ -72,8 +72,8 @@ def gptdemo():
         '''
     
     
-@app.route('/About')
-def About():
+@app.route('/about')
+def about():
     print('processing / route')
     return f'''
         <h1>About</h1>
@@ -99,7 +99,7 @@ def team():
         <li>Chris Liang </li>
         <li>Matthew Yue </li>
         <li>Yishan Gao </li>
-        <li>Tingwei Pu: I created the website frame(about, team and index pages) 
+        <li>Tingwei Pu: I created the website frame(About, Team and Index pages) 
             and wrote the <strong>getEconomyOutlook</strong> method. </li>
         <br>
         <a href="/">Main page</a >
@@ -131,7 +131,7 @@ def formpage():
         <li>Chris Liang </li>
         <li>Matthew Yue </li>
         <li>Yishan Gao </li>
-        <li>Tingwei Pu:  <a href="{url_for('getEconomyOutlook')}"> </li>
+        <li>Tingwei Pu:  <a href="{url_for('getEconomyOutlook')}"> getEconomyOutlook Form </a> <p> </li>
         <br>
         <a href="/">Main page</a >
     '''
@@ -139,7 +139,7 @@ def formpage():
 
 #Author: Tingwei Pu 
 # To generate the the economy outlook of a country 
-@app.route('/indexpage/getEconomyOutlook', methods=['GET', 'POST'])
+@app.route('/getEconomyOutlook', methods=['GET', 'POST'])
 def getEconomyOutlook():
     ''' handle a get request by sending a form 
         and a post request by returning the GPT response
@@ -165,15 +165,9 @@ def getEconomyOutlook():
             <textarea name="prompt"></textarea>
             <p><input type=submit value="get response">
         </form>
+        <a href="/">Main page</a > <p>
         '''
     
-
-@app.route('/formpage/getEconomyOutlook')
-def show_result(result):
-    result_url = url_for('show_result')
-    return f'The processed result is: {result}'
-
-
 
 
 if __name__=='__main__':
