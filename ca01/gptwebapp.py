@@ -27,11 +27,11 @@ import openai
 
 app = Flask(__name__)
 g = GPT((os.environ.get('APIKEY')))
-openai.api_key = "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"
+openai.api_key = "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"
 
 @app.route('/')
 @app.route('/<name>')
-def home(name='Tim'):
+def home(name='Matthew'):
     ''' display a link to the general query page '''
     print('processing / route')
     return f'''
@@ -45,9 +45,6 @@ def home(name='Tim'):
             </li>
             <li>
                 <a style="font-family:verdana;font-size:30px" href="{url_for('index', name=name)}">Index</a>
-            </li>
-            <li>
-                <a style="font-family:verdana;font-size:30px" href="{url_for('form', name=name)}">Form</a>
             </li>
         </ul>
     '''
@@ -88,12 +85,11 @@ def team():
             <ul>
                 <li><p style=d"font-family:Courier New;font-size:20px">Captain, made a GPT Web App that can generate an image according to the prompt</p></li>
             </ul>
-            
             # add your roles below
             <p style="font-family:Courier New;font-size:25px">Chris Liang</p>
             <p style="font-family:Courier New;font-size:25px">Matthew Yue</p>
             <ul>
-                <li><p style=d"font-family:Courier New;font-size:20px">Created a GPT program to </p></li>
+                <li><p style=d"font-family:Courier New;font-size:20px">Created a GPT Web App to correct the spelling, grammar, and punctuation of a user inputted prompt. to </p></li>
             </ul>
             <p style="font-family:Courier New;font-size:25px">Yishan Gao</p>
             <p style="font-family:Courier New;font-size:25px">Tingwei Pu</p>
@@ -109,43 +105,12 @@ def index():
     return f'''
         <h1 style="font-family:verdana">Pages of our members</h1>
         <ul>
-            <li><a style="font-family:Courier New;font-size:20px" href="{url_for('home', name='Tim')}">Tim</a></li>
+            <li><a style="font-family:Courier New;font-size:20px" href="{url_for('form', name='Tim')}">Tim</a></li>
+            <li><a style="font-family:Courier New;font-size:20px" href="{url_for('form', name='Matthew')}">Matthew</a></li>
         </ul>
-            <li><a style="font-family:Courier New;font-size:20px" href="{url_for('matthewform', name='Matthew')}">Matthew</a></li>
+            
         <a style="font-family:verdana;font-size:20px" href="{url_for('home', name=name)}">Back to main</a>
     '''
-
-@app.route('/matthewform', methods=['GET', 'POST'])
-def matthewform():
-    ''' handle a get request by sending a form
-        and a post request by returning the GPT response
-    '''
-    name = request.args.get('name')
-    if request.method == 'POST':
-        prompt = request.form['prompt']
-        if name == 'Matthew':
-            response = g.editString(prompt, "fix grammar, spelling, punctuation")
-        else:
-            response = 'Error: Invalid name'
-        return f'''
-        <h1 style="font-family:verdana">GPT Web App</h1>
-        <pre style="font-size:20px">Your prompt is "{prompt}"</pre>
-        <hr>
-        <pre style="font-size:20px">Here is the answer</pre>
-        {response}
-        <p><a style="font-family:verdana;font-size:20px" href={url_for('form', name=name)}>Make another query</a>
-        <br><a style="font-family:verdana;font-size:20px" href="{url_for('home', name=name)}">Back to main</a></p>
-        '''
-    else:
-        return '''
-        <h1 style="font-family:verdana">GPT Web App</h1>
-        <p style="font-family:verdana;font-size:20px">Enter your query below</p>
-        <form method="post">
-            <textarea name="prompt"></textarea>
-            <p style="font-family:Courier New;font-size:30px"><input type=submit value="Get response">
-        </form>
-        '''
-
 
 @app.route('/form', methods=['GET', 'POST'])
 def form():
@@ -156,7 +121,10 @@ def form():
     if request.method == 'POST':
         prompt = request.form['prompt']
         if name == 'Tim':
-            result = g.editString(prompt, "fix grammar, spelling, and punctuation")
+            image_data = g.generateImage(prompt)
+            response = f'<img src="data:image/png;base64,{image_data}"/>'
+        elif name == 'Matthew':
+            response = g.editString(prompt, "fix grammar, spelling, punctuation")
         else:
             response = 'Error: Invalid name'
         return f'''
