@@ -133,7 +133,7 @@ def form():
             image_data = g.generateImage(prompt)
             response = f'< img src="data:image/png;base64,{image_data}"/>'
         elif name == 'Chris':
-            response = g.recipe(prompt)
+            response = g.paraphrase(prompt)
         else:
             response = 'Error: Invalid name'
         return f'''
