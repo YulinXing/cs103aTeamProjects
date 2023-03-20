@@ -35,7 +35,7 @@ class GPT():
         openai.api_key = apikey #os.environ.get('APIKEY')
 
         # Set up the model and prompt
-        self.model_engine = "text-davinci-003"
+        self.model_engine = "davinci"
         self.image_model = "image-alpha-001"
 
     def getResponse(self, prompt):
@@ -68,21 +68,24 @@ class GPT():
         img_str = base64.b64encode(buffered.getvalue()).decode()
 
         return img_str
-
-    def editString(self, input, instruction):
-        '''Edit the entered prompt and fixes errors'''
-        edit = openai.Edit.create(
-            input = input,
-            instruction = instruction,
-            temperature = 0.2,
-            model= "text-davinci-edit-001",
-            n=1
-        )
-        response = edit.choices[0].text
-        return response
-
     
-    # add your methods below
+    def recipe(self,course):
+        ''' Generate a paraphrase for a sentence '''
+        prompt = 'genrate a paraphrase for ' + course
+        completion = openai.Completion.create(
+            engine=self.model_engine,
+            prompt=prompt,
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.8,
+        )
+        response = completion.choices[0].text
+        return response 
 
 
 if __name__ == '__main__':
+    '''
+    '''
+    g = GPT(os.environ.get("APIKEY"))
+    print(g.recipe("I love you"))
