@@ -34,9 +34,10 @@ def index():
     print('processing / route')
     return f'''
         <h1>GPT Demo</h1>
-        <a href="{url_for('gptdemo')}">Ask questions to GPT</a>
+        <a href="{url_for('gptdemo')}">Ask questions to GPT</a> <p>
+        <a href="{url_for('About')}">About</a> <p>
+        <a href="{url_for('team')}">team</a> <p>
     '''
-
 
 @app.route('/gptdemo', methods=['GET', 'POST'])
 def gptdemo():
@@ -64,12 +65,37 @@ def gptdemo():
             <textarea name="prompt"></textarea>
             <p><input type=submit value="get response">
         </form>
-        '''
+
+        
+                        '''
+@app.route('/About')
+def About():
+    print('processing / route')
+    return f'''
+        <h1>About</h1>
+        <p>This is Team 28's CA01. </p >
+        <p> This is a Web app using Flask which uses promot engineering to generate useful reponses. </p >
+  
+        <!--enter links to other pages here-->
+        <br>
+        <a href="/">Main page</a >
+    '''
+    
+@app.route('/team')
+def team():
+    print('processing / route')
+    return f'''
+        <h1>Team</h1>
+        <p>Team 28</p >
+        <li>Tim Xing(Captain) </li>
+        <li>Chris Liang </li>
+        <li>Matthew Yue</li>
+        <li>Yishan Gao</li>
+        <li>Tingwei Pu</li>
+        <br>
+        <a href="/">Main page</a >
+    '''
 
 if __name__=='__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(
-<<<<<<< HEAD
     app.run(debug=True,port=5001)
-=======
-    app.run(debug=True,port=5001)
->>>>>>> 10dba5c6347d93ff318ead8b9d50ef6810aa822a
