@@ -11,7 +11,6 @@ summarize transaction by date, month, year, and category
 ```
 
 # Implementation
-&nbsp;
 - ## show transactions
 ```bash
 when call show transactions, the program will show the table which contains information of each transaction
@@ -26,7 +25,6 @@ item #     amount       category        date               description
 4          50           ccc             2021-01-23         ccc
 ---------------------------------------------------------------------------
 ```
-&nbsp;
 - ## add transaction
 ```bash
 when call add transaction, the program will ask the user to input the information of the transaction and add the transaction to the database
@@ -51,7 +49,6 @@ item #     amount       category        date               description
 5          100000       test            2012-09-07         for test
 ---------------------------------------------------------------------------
 ```
-&nbsp;
 - ## delete transaction
 ```bash
 when call delete transaction, the program will ask the user to input the item number of the transaction and delete the transaction from the database
@@ -82,7 +79,6 @@ item #     amount       category        date               description
 4          50           ccc             2021-01-23         ccc
 ---------------------------------------------------------------------------
 ```
-&nbsp;
 - ## summarize transactions by date, month, year, or category
 ```bash
 when call summarize by date, month, year, or category, the program will show the total amount of transactions according to the conditions
