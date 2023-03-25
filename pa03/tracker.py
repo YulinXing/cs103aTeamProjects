@@ -1,4 +1,6 @@
 '''
+This program is written by Tim
+
 Tracker is an app that maintains a transactions database.
 
 It also uses an Object Relational Mapping (ORM)
