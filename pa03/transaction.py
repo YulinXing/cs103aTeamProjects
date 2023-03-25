@@ -1,4 +1,6 @@
 '''
+This program is written by Tim
+
 Transaction is an Object Relational Mapping to the transactions.db database
 
 The ORM will work map SQL rows with the schema
