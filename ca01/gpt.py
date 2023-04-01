@@ -35,7 +35,7 @@ class GPT():
         openai.api_key = apikey #os.environ.get('APIKEY')
 
         # Set up the model and prompt
-        self.model_engine = "davinci"
+        self.model_engine = "text-davinci-003"
         self.image_model = "image-alpha-001"
 
     def getResponse(self, prompt):
@@ -68,20 +68,43 @@ class GPT():
         img_str = base64.b64encode(buffered.getvalue()).decode()
 
         return img_str
+
+    def paraphrase(self,course):
+            ''' Generate a paraphrase for a sentence '''
+            prompt = 'genrate a paraphrase for ' + course
+            completion = openai.Completion.create(
+                engine=self.model_engine,
+                prompt=prompt,
+                max_tokens=1024,
+                n=1,
+                stop=None,
+                temperature=0.8,
+            )
+            response = completion.choices[0].text
+            return response 
+
+    def editString(self, input, instruction):
+        '''Edit the entered prompt and fixes errors'''
+        edit = openai.Edit.create(
+            input = input,
+            instruction = instruction,
+            temperature = 0.2,
+            model= "text-davinci-edit-001",
+            n=1
+        )
+        response = edit.choices[0].text
+        return response
+
+    def getEconomyOutlook(self, prompt):
+        text = "Analyze the current enconomic outlook and predict the future outlook."
+        response = self.getResponse(text + prompt)
+        return response
     
-    # add your methods below
 
 
-if __name__ == '__main__':
+if __name__=='__main__':
     '''
     '''
+    import os
     g = GPT(os.environ.get("APIKEY"))
-
-    # # Generate some data for the plot
-    # x = np.linspace(0, 10, 100)
-    # y = np.sin(x)
-
-    # # Generate the plot
-    # g.generatePlot(x, y, xlabel="x", ylabel="y", title="Plot of y = sin(x)")
-
-    g.generateImage("a cat in an apple")
+    #print(g.getResponse("what does openai's GPT stand for?"))

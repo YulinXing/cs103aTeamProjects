@@ -59,8 +59,31 @@ def about():
         return f'''
             <h1 style="font-family:verdana">About My Web App</h1>
             <ul>  
-                <pre style="font-size:25px">This is a simple web application that uses OpenAI's GPT API to generate text based on user prompts.
-                <br>My program can generating an image according to your prompt</pre>
+                <p style="font-family:verdana; font-size:25px">Can generating an image according to your prompt</p>
+            </ul>
+            <a style="font-family:verdana;font-size:20px" href="{url_for('home',name=name)}">Back to main</a>
+        '''
+    elif name=='Chris':
+        return f'''
+            <h1 style="font-family:verdana">About My Web App</h1>
+            <ul>  
+                <p style="font-family:verdana;; font-size:25px">Can paraphrase texts according to your prompt</p>
+            </ul>
+            <a style="font-family:verdana;font-size:20px" href="{url_for('home',name=name)}">Back to main</a>
+        '''
+    elif name=='Matthew':
+        return f'''
+            <h1 style="font-family:verdana">About My Web App</h1>
+            <ul>  
+                <p style="font-family:verdana;; font-size:25px; word-wrap: break-word">Created a GPT Web App to correct the spelling, grammar, and punctuation of a user inputted prompt</p>
+            </ul>
+            <a style="font-family:verdana;font-size:20px" href="{url_for('home',name=name)}">Back to main</a>
+        '''
+    elif name=='Tingwei':
+        return f'''
+            <h1 style="font-family:verdana">About My Web App</h1>
+            <ul>  
+                <p style="font-family:verdana;; font-size:25px; word-wrap: break-word">Created the website frame(About, Team and Index pages) and wrote the <strong>getEconomyOutlook</strong> method</p>
             </ul>
             <a style="font-family:verdana;font-size:20px" href="{url_for('home',name=name)}">Back to main</a>
         '''
@@ -68,7 +91,7 @@ def about():
          return f'''
             <h1 style="font-family:verdana">About My Web App</h1>
             <ul>  
-                <pre style="font-size:25px">This is a simple web application that uses OpenAI's GPT API to generate text based on user prompts.</pre>
+                <p style="font-size:25px">This is a simple web application that uses OpenAI's GPT API to generate text based on user prompts.</p>
             </ul>
             <a style="font-family:verdana;font-size:20px" href="{url_for('home',name=name)}">Back to main</a>
         '''
@@ -80,18 +103,18 @@ def team():
     print('processing /team route')
     name = request.args.get('name')
     return f'''
-        <h1 style="font-family:verdana">Team 28</h1>
+        <h1>About our team</h1>
         <ul>
-            <p style="font-family:Courier New;font-size:25px">Tim Xing</p>
-            <ul>
-                <li><p style=d"font-family:Courier New;font-size:20px">Captain, made a GPT Web App that can generate an image according to the prompt</p></li>
-            </ul>
-            
-            # add your roles below
-            <p style="font-family:Courier New;font-size:25px">Chris Liang</p>
-            <p style="font-family:Courier New;font-size:25px">Matthew Yue</p>
-            <p style="font-family:Courier New;font-size:25px">Yishan Gao</p>
-            <p style="font-family:Courier New;font-size:25px">Tingwei Pu</p>
+            <p style="font-family:verdana; font-size:25px">This is Team 28's CA01.</p>
+            <p style="font-family:verdana; font-size:25px">This is a Web app using Flask which uses promot engineering to generate useful reponses.</p>
+            <p style="font-family:verdana; font-size:25px; word-wrap: break-word">Motivation: gpt-based webapps using prompt engineering have already started to appear and this assignment is meant to learn how to write such apps, as well as gaining experience using git for a team project.</p>
+        </ul>
+        <ul>
+            <p style="font-family:verdana;font-size:25px">Tim Xing(Captain)</p>
+            <p style="font-family:verdana;font-size:25px">Chris Liang</p>
+            <p style="font-family:verdana;font-size:25px">Matthew Yue</p>
+            <p style="font-family:verdana;font-size:25px">Yishan Gao</p>
+            <p style="font-family:verdana;font-size:25px">Tingwei Pu</p>
         </ul>
         <a style="font-family:verdana;font-size:20px" href="{url_for('home', name=name)}">Back to main</a>
     '''
@@ -104,7 +127,10 @@ def index():
     return f'''
         <h1 style="font-family:verdana">Pages of our members</h1>
         <ul>
-            <li><a style="font-family:Courier New;font-size:20px" href="{url_for('home', name='Tim')}">Tim</a></li>
+            <li><a style="font-family:verdana;font-size:25px" href="{url_for('home', name='Tim')}">Tim</a></li>
+            <li><a style="font-family:verdana;font-size:25px" href="{url_for('home', name='Chris')}">Chris</a></li>
+            <li><a style="font-family:verdana;font-size:25px" href="{url_for('home', name='Matthew')}">Matthew</a></li>
+            <li><a style="font-family:verdana;font-size:25px" href="{url_for('home', name='Tingwei')}">Tingwei</a></li>
         </ul>
         <a style="font-family:verdana;font-size:20px" href="{url_for('home', name=name)}">Back to main</a>
     '''
@@ -121,14 +147,20 @@ def form():
         if name == 'Tim':
             image_data = g.generateImage(prompt)
             response = f'<img src="data:image/png;base64,{image_data}"/>'
+        elif name == 'Chris':
+            response = g.paraphrase(prompt)
+        elif name == 'Matthew':
+            response = g.editString(prompt, "fix grammar, spelling, punctuation")
+        elif name == 'Tingwei':
+            response = g.getEconomyOutlook(prompt)
         else:
             response = 'Error: Invalid name'
         return f'''
         <h1 style="font-family:verdana">GPT Web App</h1>
         <pre style="font-size:20px">Your prompt is "{prompt}"</pre>
         <hr>
-        <pre style="font-size:20px">Here is the answer</pre>
-        {response}
+        <pre style="font-size:20px">Here is the answer: </pre>
+        <p style="font-family:verdana; font-size:30px; word-wrap: break-word">{response}</p>
         <p><a style="font-family:verdana;font-size:20px" href={url_for('form', name=name)}>Make another query</a>
         <br><a style="font-family:verdana;font-size:20px" href="{url_for('home', name=name)}">Back to main</a></p>
         '''
@@ -141,6 +173,7 @@ def form():
             <p style="font-family:Courier New;font-size:30px"><input type=submit value="Get response">
         </form>
         '''
+    
 if __name__ == '__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(
     app.run(debug=True, port=5001)
