@@ -1,0 +1,13 @@
+<pre>
+    <%= JSON.stringify(item,null,5) %>
+</pre>
+<form method="POST" action="/transaction/updateTransaction/<%=item._id%>">
+    <input type="hidden" name="itemId" value="<%= item._id %>">
+    new item: 
+    <input type="text" value="<%= item.description %>" name="description">
+    <input type="number" value="<%= item.amount %>" name="amount">
+    <input type="text" value="<%= item.category %>" name="category">
+    <input type="datetime" value="<%= item.date ? item.dateFormatted : moment(item.createdAt).format('MMM/DD/YYYY') %>" name="createdAt">
+    <button type="submit">Update</button>
+  </form>
+  
