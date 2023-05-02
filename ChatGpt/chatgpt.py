@@ -14,24 +14,28 @@ On Mac
 
 On Windows:
 % pip install openai
-% $env:APIKEY="....." # 
+% $env:APIKEY="....." # in powershell 
 % python gpt.py
 '''
 import openai
-
+import os
+import base64
+import requests
+from io import BytesIO
 
 class GPT():
     ''' make queries to gpt from a given API '''
-    def __init__(self,apikey):
+    def __init__(self, apikey):
         ''' store the apikey in an instance variable '''
-        self.apikey=apikey
+        self.apikey = apikey
         # Set up the OpenAI API client
-        openai.api_key = apikey #os.environ.get('APIKEY')
+        openai.api_key = "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" #os.environ.get('APIKEY')
 
         # Set up the model and prompt
         self.model_engine = "text-davinci-003"
+        self.image_model = "image-alpha-001"
 
-    def getResponse(self,prompt):
+    def getResponse(self, prompt):
         ''' Generate a GPT response '''
         completion = openai.Completion.create(
             engine=self.model_engine,
@@ -44,8 +48,39 @@ class GPT():
 
         response = completion.choices[0].text
         return response
+    
+    def generateImage(self, prompt):
+        ''' Generate an image from the prompt '''
+        result = openai.Image.create(
+            prompt=prompt,
+            n=1,
+            size="512x512",
+            model=self.image_model,
+            response_format="url"
+        )
 
-if __name__=='__main__':
+        img = Image.open(BytesIO(requests.get(result['data'][0]['url']).content))
+        buffered = BytesIO()
+        img.save(buffered, format="PNG")
+        img_str = base64.b64encode(buffered.getvalue()).decode()
+
+        return img_str
+    
+    def paraphrase(self,course):
+        ''' Generate a paraphrase for a sentence '''
+        prompt = 'genrate a paraphrase for ' + course
+        completion = openai.Completion.create(
+            engine=self.model_engine,
+            prompt=prompt,
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.8,
+        )
+        response = completion.choices[0].text
+        return response 
+
+if __name__=='Yishan':
     '''
     '''
     import os
